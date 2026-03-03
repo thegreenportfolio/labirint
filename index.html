@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Labirintul Școlar – Labirint educațional pentru liceu</title>
+
+  <!-- Basic SEO & Social -->
+  <meta name="description" content="Labirintul Școlar este un joc educațional de tip labirint unde progresul este deblocat prin răspunsuri corecte la întrebări. Disponibil în App Store." />
+  <!-- Completează după ce ai App Store ID -->
+  <meta name="apple-itunes-app" content="app-id=APPLE_APP_ID_HERE">
+
+  <meta property="og:title" content="Labirintul Școlar" />
+  <meta property="og:description" content="Explorează labirintul. Când drumul este blocat, răspunde corect pentru a debloca trecerea." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://maze.thegreenportfolio.ca/assets/preview.png" />
+  <meta property="og:url" content="https://maze.thegreenportfolio.ca/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- ✅ Meta Pixel REMOVED (recomandat pentru app educațional) -->
+
+  <style>
+    :root {
+      --bg: #f5f8f4;
+      --bg-body: #f5f5f7;
+      --bg-card: #ffffff;
+      --border-card: #e5e5ea;
+      --pill-bg: #ffffff;
+      --pill-border: #d2d2d7;
+      --accent: #0d8a25;
+      --accent-soft: #e4f4e8;
+      --accent-dark: #0b6a1e;
+      --text-main: #111111;
+      --text-sub: #6e6e73;
+      --chip-bg: #f2f2f7;
+      --chip-border: #e5e5ea;
+      --button-text: #ffffff;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020b05;
+        --bg-body: #000000;
+        --bg-card: #1c1c1e;
+        --border-card: #3a3a3c;
+        --pill-bg: #1c1c1e;
+        --pill-border: #3a3a3c;
+        --accent: #44d965;
+        --accent-soft: #062411;
+        --accent-dark: #2ba448;
+        --text-main: #f5f5f7;
+        --text-sub: #a1a1a6;
+        --chip-bg: #2c2c2e;
+        --chip-border: #3a3a3c;
+        --button-text: #020b05;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, -system-ui,
+                   "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg-body);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page { min-height: 100vh; display: flex; flex-direction: column; }
+
+    .hero {
+      background: radial-gradient(circle at top left, var(--accent-soft) 0, var(--bg) 40%, var(--bg-body) 100%);
+      padding: 40px 16px 56px;
+      text-align: center;
+    }
+
+    .hero-inner { max-width: 980px; margin: 0 auto; }
+
+    .gp-label {
+      letter-spacing: 0.18em;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-sub);
+      margin-bottom: 10px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      font-size: 13px;
+      margin-bottom: 18px;
+      white-space: nowrap;
+    }
+
+    .pill-icon {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      object-fit: contain;
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.05;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 0 0 18px;
+      color: var(--text-main);
+    }
+
+    .hero-subtitle {
+      max-width: 680px;
+      margin: 0 auto 22px;
+      font-size: 18px;
+      color: var(--text-sub);
+    }
+
+    .chips {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .chip {
+      border-radius: 999px;
+      padding: 7px 12px;
+      background: var(--chip-bg);
+      border: 1px solid var(--chip-border);
+      font-size: 13px;
+      color: var(--text-sub);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 22px 0 6px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      border-radius: 999px;
+      padding: 14px 26px;
+      font-weight: 600;
+      font-size: 16px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--button-text);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32);
+    }
+
+    .btn-secondary {
+      background: var(--pill-bg);
+      color: var(--text-main);
+      border-color: var(--pill-border);
+    }
+
+    .btn-secondary:hover { transform: translateY(-1px); }
+
+    .hero-note {
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--text-sub);
+    }
+
+    .intro { padding: 34px 16px 6px; text-align: center; }
+    .intro-inner { max-width: 820px; margin: 0 auto; font-size: 17px; color: var(--text-sub); }
+    .intro-inner strong { color: var(--text-main); }
+
+    .features-media { max-width: 980px; margin: 30px auto 10px; padding: 0 16px; }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .feature-row.reverse { direction: rtl; }
+    .feature-row.reverse > * { direction: ltr; }
+
+    .feature-copy h3 { font-size: 24px; margin: 0 0 10px; }
+    .feature-copy p { margin: 0; font-size: 16px; color: var(--text-sub); line-height: 1.55; }
+
+    .feature-media-frame {
+      border-radius: 28px;
+      background: #000;
+      overflow: hidden;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      max-width: 360px;
+      justify-self: center;
+    }
+
+    .feature-media-frame img { display: block; width: 100%; height: auto; }
+
+    .hero-video {
+      max-width: 360px;
+      margin: 24px auto 0;
+      border-radius: 28px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+    }
+    .hero-video video { display: block; width: 100%; height: auto; }
+
+    .card-shell { max-width: 1020px; margin: 34px auto; padding: 0 16px; }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: 26px;
+      border: 1px solid var(--border-card);
+      padding: 32px 26px 30px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.04);
+    }
+
+    .card-title { text-align: center; font-size: 26px; margin: 0 0 4px; }
+    .card-subtitle { text-align: center; font-size: 15px; color: var(--text-sub); margin-bottom: 26px; }
+
+    .what-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 36px; }
+    .what-item-title { display: flex; align-items: center; gap: 10px; font-weight: 600; margin-bottom: 6px; }
+    .what-dot { width: 9px; height: 9px; border-radius: 999px; background: var(--accent); }
+    .what-item-body { font-size: 14px; color: var(--text-sub); line-height: 1.5; }
+
+    .section { max-width: 820px; margin: 40px auto 0; padding: 0 16px; text-align: center; }
+    .section h2 { font-size: 24px; margin-bottom: 8px; }
+    .section p { margin: 0 0 10px; font-size: 15px; color: var(--text-sub); }
+    .section p strong { color: var(--text-main); }
+
+    footer { margin: 40px 0 30px; font-size: 12px; color: var(--text-sub); text-align: center; }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    .footer-links { margin-top: 10px; margin-bottom: 8px; }
+    .footer-links a { display: inline-flex; align-items: center; gap: 6px; margin: 0 7px; font-size: 13px; }
+
+    @media (max-width: 768px) {
+      .hero { padding-top: 30px; padding-bottom: 42px; }
+      .hero-title { font-size: 32px; }
+      .feature-row { grid-template-columns: minmax(0, 1fr); }
+      .card { padding: 24px 18px 22px; }
+      .what-grid { grid-template-columns: minmax(0, 1fr); }
+      .feature-media-frame { max-width: 360px; }
+    }
+  </style>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="gp-label">THE GREEN PORTFOLIO</div>
+
+      <div class="hero-pill">
+        <img class="pill-icon" src="./assets/maze-icon.png" alt="Pictogramă Labirintul Școlar" />
+        <span>Labirintul Școlar pentru iPhone & iPad</span>
+      </div>
+
+      <h1 class="hero-title">Labirintul Școlar</h1>
+      <p class="hero-subtitle">
+        Explorează labirintul. Când drumul este blocat, răspunde corect pentru a debloca trecerea.
+        Învață, exersează și progresează prin niveluri concepute pentru clasele 9–12.
+      </p>
+
+      <div class="chips" aria-label="Repere">
+        <span class="chip">🧩 Labirint + întrebări</span>
+        <span class="chip">📚 Română • Matematică • Fizică</span>
+        <span class="chip">🎓 Clasele 9–12</span>
+        <span class="chip">⚡ 15 niveluri per materie</span>
+      </div>
+
+      <div class="hero-cta-row">
+        <a class="btn-primary"
+           href="APP_STORE_URL_HERE"
+           target="_blank"
+           rel="noopener">
+          Descarcă din App Store
+        </a>
+        <a class="btn-secondary" href="#features">Vezi funcțiile principale</a>
+      </div>
+
+      <!-- ✅ Removed links to other apps -->
+      <div class="hero-note">
+        Exersează. Concentrează-te. Reușește.
+      </div>
+    </div>
+  </header>
+
+  <section class="intro">
+    <p class="intro-inner">
+      <strong>Labirintul Școlar</strong> combină dinamica labirintului cu exercițiul intelectual.
+      Continui rapid — întrebările apar doar când drumul este blocat.
+    </p>
+  </section>
+
+  <!-- FEATURE MEDIA using YOUR screenshots -->
+  <section id="features" class="features-media" aria-label="Previzualizări funcții">
+
+    <div class="feature-row">
+      <div class="feature-copy">
+        <h3>Întrebarea Genie</h3>
+        <p>
+          Când o trecere este blocată, Genie apare și te ajută să mergi mai departe cu o întrebare rapidă cu
+          <strong>3 răspunsuri</strong>.
+          Ai <strong>3 încercări</strong> ca să răspunzi corect și să deblochezi drumul.
+          Dacă folosești toate încercările, nivelul se resetează și începi din nou.
+        </p>
+      </div>
+      <div class="feature-media-frame">
+        <img src="./assets/maze-1.png" alt="Ecran întrebare Genie" />
+      </div>
+    </div>
+
+    <div class="feature-row reverse">
+      <div class="feature-copy">
+        <h3>Labirint clar și ușor de urmărit</h3>
+        <p>
+          Controale simple și vizual curat ca să te concentrezi pe orientare, nu pe meniuri.
+          Intră în labirint și învață pe parcurs.
+        </p>
+      </div>
+      <div class="feature-media-frame">
+        <img src="./assets/maze-2.png" alt="Gameplay labirint" />
+      </div>
+    </div>
+
+    <div class="feature-row">
+      <div class="feature-copy">
+        <h3>Materii și clase</h3>
+        <p>
+          Alege materia și clasa (9–12) și progresează prin <strong>15 niveluri</strong>.
+          Conținut organizat gradual, gândit pentru exercițiu și consolidare.
+        </p>
+      </div>
+      <div class="feature-media-frame">
+        <img src="./assets/maze-3.png" alt="Ecran alegere materie" />
+      </div>
+    </div>
+
+    <div class="feature-row reverse">
+      <div class="feature-copy">
+        <h3>Sesiuni scurte, progres real</h3>
+        <p>
+          Niveluri rapide, perfecte pentru pauze scurte.
+          Fiecare nivel îți testează atenția și îți construiește progresul pas cu pas.
+          Cunoașterea îți deschide viitorul.
+        </p>
+      </div>
+      <div class="feature-media-frame">
+        <img src="./assets/maze-4.png" alt="Ecran nivel finalizat" />
+      </div>
+    </div>
+
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="card-shell">
+    <div class="card">
+      <h2 class="card-title">Ce primești</h2>
+      <p class="card-subtitle">Simplu, clar și făcut să fie plăcut.</p>
+
+      <div class="what-grid">
+        <div>
+          <div class="what-item-title"><span class="what-dot"></span><span>Niveluri care cresc gradual</span></div>
+          <div class="what-item-body">Dificultatea crește lin, păstrând experiența provocatoare și satisfăcătoare.</div>
+        </div>
+
+        <div>
+          <div class="what-item-title"><span class="what-dot"></span><span>Învățare ghidată de Genie</span></div>
+          <div class="what-item-body">Genie apare la momentul potrivit și îți oferă până la 3 încercări pentru deblocare.</div>
+        </div>
+
+        <div>
+          <div class="what-item-title"><span class="what-dot"></span><span>Întrebări rapide, focus maxim</span></div>
+          <div class="what-item-body">Trecerile blocate declanșează întrebări scurte cu 3 opțiuni de răspuns.</div>
+        </div>
+
+        <div>
+          <div class="what-item-title"><span class="what-dot"></span><span>Progres și consecvență</span></div>
+          <div class="what-item-body">Finalizează niveluri, consolidează cunoștințele și avansează constant.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section">
+    <h2>Cum funcționează</h2>
+    <p>
+      Navighează prin labirint → întâlnești un drum blocat → răspunzi corect la întrebare → continui către ieșire.
+    </p>
+
+    <div class="what-grid" style="margin-top:18px;">
+      <div>
+        <div class="what-item-title"><span class="what-dot"></span><span>Mișcare</span></div>
+        <div class="what-item-body">Explorezi coridoarele și cauți ieșirea.</div>
+      </div>
+
+      <div>
+        <div class="what-item-title"><span class="what-dot"></span><span>Deblocare</span></div>
+        <div class="what-item-body">Răspunsurile corecte deschid uși și dezvăluie noi rute.</div>
+      </div>
+
+      <div>
+        <div class="what-item-title"><span class="what-dot"></span><span>Învățare</span></div>
+        <div class="what-item-body">Întrebări scurte, utile și bine structurate pe materii și clase.</div>
+      </div>
+
+      <div>
+        <div class="what-item-title"><span class="what-dot"></span><span>Progres</span></div>
+        <div class="what-item-body">Finalizezi niveluri și avansezi etapă cu etapă.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:22px; text-align:center;">
+      <a href="APP_STORE_URL_HERE"
+         target="_blank"
+         rel="noopener">
+        <img
+          src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ro-ro?size=250x83"
+          alt="Descarcă din App Store"
+          style="height:56px;"
+        />
+      </a>
+    </div>
+
+    <div class="hero-video">
+      <video autoplay muted playsinline loop>
+        <source src="./assets/LabirintulScolar.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </section>
+
+  <!-- SUPPORT & PRIVACY -->
+  <section class="section">
+    <h2>Suport &amp; confidențialitate</h2>
+    <p>
+      Ai nevoie de ajutor, ai găsit o problemă sau ai o sugestie? Scrie-ne oricând.
+    </p>
+
+    <div class="footer-links">
+      <a href="./support.html">💬 Suport</a>
+      <a href="./privacy.html">📄 Politica de confidențialitate</a>
+      <!-- ✅ Removed links to other sites/apps -->
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 The Green Portfolio. Toate drepturile rezervate.</p>
+  </footer>
+
+</div>
+</body>
+</html>
